@@ -20,7 +20,6 @@ function Task({ task }) {
   };
 
   useEffect(() => {
-    console.log("useEffect Call2");
     dispatch(getTaskList());
   }, [inTask]);
 
