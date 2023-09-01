@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/tasks/";
+const API_URL = "/tasks/";
 
 const getTaskList = async () => {
   const res = await fetch(API_URL);

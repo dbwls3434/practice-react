@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import taskService from "./taskService";
 
 const initialState = {
-  task: [],
+  task: null,
   tasks: [],
 };
 
@@ -35,15 +35,20 @@ export const taskSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getTaskList.fulfilled, (state, action) => {
+        state.task = null;
         state.tasks = action.payload;
       })
       .addCase(getTaskDetail.fulfilled, (state, action) => {
-        state.tasks = action.payload;
+        state.task = action.payload;
       })
       .addCase(createTask.fulfilled, (state, action) => {
+        state.task = action.payload;
         state.tasks.push(action.payload);
       })
       .addCase(updateTask.fulfilled, (state, action) => {
+        state.task = {
+          ...state.tasks.filter((task) => task.id === action.payload),
+        };
         state.tasks.map((task) =>
           task.id === action.payload
             ? { ...task, reminder: !task.reminder }
@@ -51,6 +56,9 @@ export const taskSlice = createSlice({
         );
       })
       .addCase(deleteTask.fulfilled, (state, action) => {
+        state.task = {
+          ...state.tasks.filter((task) => task.id === action.payload),
+        };
         state.tasks.filter((task) => task.id !== action.payload);
       });
   },

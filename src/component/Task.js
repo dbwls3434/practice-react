@@ -1,9 +1,15 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { deleteTask, updateTask } from "../features/task/taskSlice";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteTask,
+  getTaskList,
+  updateTask,
+} from "../features/task/taskSlice";
 
 function Task({ task }) {
   const dispatch = useDispatch();
+
+  const { task: inTask } = useSelector((state) => state.task);
 
   const onClick = (id) => {
     dispatch(deleteTask(id));
@@ -12,6 +18,11 @@ function Task({ task }) {
   const onDoubleClick = (id) => {
     dispatch(updateTask(id));
   };
+
+  useEffect(() => {
+    console.log("useEffect Call2");
+    dispatch(getTaskList());
+  }, [inTask]);
 
   return (
     <div onDoubleClick={onDoubleClick.bind(this, task.id)}>

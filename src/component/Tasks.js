@@ -10,7 +10,7 @@ function Tasks() {
 
   useEffect(() => {
     dispatch(getTaskList());
-  }, [tasks, dispatch]);
+  }, []);
 
   return (
     <>
