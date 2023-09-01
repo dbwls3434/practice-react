@@ -1,12 +1,25 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { deleteTask, updateTask } from "../features/task/taskSlice";
 
-function Task({ task, onDeleteTask, onUpdateTask }) {
+function Task({ task }) {
+  const dispatch = useDispatch();
+
+  const onClick = (id) => {
+    dispatch(deleteTask(id));
+  };
+
+  const onDoubleClick = (id) => {
+    dispatch(updateTask(id));
+  };
+
   return (
-    <div onDoubleClick={() => onUpdateTask(task.id)}>
-      <h3>{task.text}</h3>
+    <div onDoubleClick={onDoubleClick.bind(this, task.id)}>
+      <h3>{task.id}</h3>
+      <p>{task.text}</p>
       <p>{task.day}</p>
-      <p>{task.reminder ? "reminder" : "no"}</p>
-      <button onClick={() => onDeleteTask(task.id)}>delete</button>
+      <p>{task.reminder ? "true" : "false"}</p>
+      <button onClick={onClick.bind(this, task.id)}>delete</button>
     </div>
   );
 }

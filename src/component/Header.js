@@ -1,21 +1,11 @@
-import PropTypes from "prop-types";
 import Button from "./Button";
-
-function Header({ title }) {
+function Header() {
   return (
     <header className="header">
-      <h1>{title}</h1>
+      <h1>Task Tracker</h1>
       <Button />
     </header>
   );
 }
-
-Header.defaultProps = {
-  title: "Task Tracker",
-};
-
-Header.propType = {
-  title: PropTypes.string.isRequired,
-};
 
 export default Header;

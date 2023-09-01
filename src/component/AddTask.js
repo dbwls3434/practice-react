@@ -1,13 +1,17 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createTask } from "../features/task/taskSlice";
 
-function AddTask({ onSubmitTask }) {
+function AddTask() {
+  const dispatch = useDispatch();
+
   const [text, setText] = useState("");
   const [day, setDay] = useState("");
   const [reminder, setReminder] = useState(false);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    onSubmitTask({ text, day, reminder });
+    dispatch(createTask({ text, day, reminder }));
   };
 
   return (

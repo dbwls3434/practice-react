@@ -1,2 +1,4 @@
-- 참고 코드 출처 : https://github.com/bradtraversy/react-crash-2021
+- \*참고 코드 출처
+  - react basic : https://github.com/bradtraversy/react-crash-2021.git
+  - redux toolkit : https://github.com/bradtraversy/mern-tutorial.git
 - 내용 : 참고 코드를 바탕으로 연습용도로 만든 파일

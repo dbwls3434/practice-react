@@ -1,15 +1,21 @@
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Task from "./Task";
+import { getTaskList } from "../features/task/taskSlice";
 
-function Tasks({ tasks, onDeleteTask, onUpdateTask }) {
+function Tasks() {
+  const dispatch = useDispatch();
+
+  const { tasks } = useSelector((state) => state.task);
+
+  useEffect(() => {
+    dispatch(getTaskList());
+  }, [tasks, dispatch]);
+
   return (
     <>
       {tasks.map((task) => (
-        <Task
-          key={task.id}
-          task={task}
-          onDeleteTask={onDeleteTask}
-          onUpdateTask={onUpdateTask}
-        />
+        <Task key={task.id} task={task} />
       ))}
     </>
   );
